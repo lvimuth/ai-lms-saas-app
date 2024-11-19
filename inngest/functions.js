@@ -8,7 +8,7 @@ export const helloWorld = inngest.createFunction(
   { event: "test/hello.world" },
   async ({ event, step }) => {
     await step.sleep("wait-a-moment", "1s");
-    return { event, body: "hello world" };
+    return { message: `Hello ${event.data.email}!` };
   }
 );
 
@@ -26,7 +26,7 @@ export const CreateNewUser = inngest.createFunction(
           .from(USER_TABLE)
           .where(eq(USER_TABLE.email, user?.primaryEmailAddress?.emailAddress));
         // If not then create a new
-        if (result.length == 0) {
+        if (result?.length == 0) {
           const userResp = await db
             .insert(USER_TABLE)
             .values({
@@ -34,6 +34,7 @@ export const CreateNewUser = inngest.createFunction(
               email: user?.primaryEmailAddress?.emailAddress,
             })
             .returning({ id: USER_TABLE.id });
+          console.log("User data received:", event.data.user);
           return userResp;
         }
         return result;
@@ -43,5 +44,5 @@ export const CreateNewUser = inngest.createFunction(
   }
   // Step is to send welcome email
 
-  //
+  // send emai notification to user after 3 days
 );

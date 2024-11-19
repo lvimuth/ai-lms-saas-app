@@ -1,0 +1,19 @@
+import React from "react";
+import SideBar from "./_components/SideBar";
+import DashboardHeader from "./_components/DashboardHeader";
+
+function DashboardLayout({ children }) {
+  return (
+    <div>
+      <div className="md:w-64 hidden md:block fixed ">
+        <SideBar />
+      </div>
+      <div className="md:m-64">
+        <DashboardHeader />
+        {children}
+      </div>
+    </div>
+  );
+}
+
+export default DashboardLayout;
