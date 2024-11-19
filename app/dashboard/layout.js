@@ -8,7 +8,7 @@ function DashboardLayout({ children }) {
       <div className="md:w-64 hidden md:block fixed ">
         <SideBar />
       </div>
-      <div className="md:m-64">
+      <div className="md:ml-64">
         <DashboardHeader />
         {children}
       </div>
