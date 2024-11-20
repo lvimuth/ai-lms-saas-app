@@ -17,6 +17,7 @@ export const CreateNewUser = inngest.createFunction(
   { id: "create-user" },
   { event: "user.create" },
   async ({ event, step }) => {
+    console.log("////////////////////");
     const user = event.data;
     // Get event data
     const result = await step.run(
@@ -25,7 +26,9 @@ export const CreateNewUser = inngest.createFunction(
         const result = await db
           .select()
           .from(USER_TABLE)
-          .where(eq(USER_TABLE.email, user?.primaryEmailAddress?.emailAddress));
+          .where(
+            eq(USER_TABLE?.email, user?.primaryEmailAddress?.emailAddress)
+          );
         // If not then create a new
         if (result?.length == 0) {
           const userResp = await db
@@ -63,7 +66,7 @@ export const GenerateNotes = inngest.createFunction(
           chapter
         )}}`;
         const result = await generateNotesAIModel.sendMessage(PROMPT);
-        const aiResp = result.response.text();
+        const aiResp = result?.response.text();
 
         await db.insert(CHAPTER_NOTES).values({
           chapterId: index,
@@ -83,7 +86,7 @@ export const GenerateNotes = inngest.createFunction(
           .set({
             status: "Ready",
           })
-          .where(eq(STUDY_MATERIAL.courseId, course?.courseId));
+          .where(eq(STUDY_MATERIAL?.courseId, course?.courseId));
         return "Ready";
       }
     );

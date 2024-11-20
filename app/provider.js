@@ -31,14 +31,9 @@ function Provider({ children }) {
     //     .returning({ id: USER_TABLE.id });
     //   console.log("New user created with ID:", userResp);
     // }
-    try {
-      const resp = await axios.post("/api/create-user", {
-        user: user,
-      });
-      console.log("Response received from API:", resp.data);
-    } catch (err) {
-      console.error("Error calling API:", err);
-    }
+
+    const resp = await axios.post("/api/create-user", { user: user });
+    console.log(resp.data);
   };
   return <div>{children}</div>;
 }
