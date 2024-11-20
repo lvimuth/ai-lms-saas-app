@@ -21,7 +21,7 @@ function CourseList() {
   return (
     <div className="mt-10">
       <h2 className="font-bold text-2xl">Your study material :</h2>
-      <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-2 gap-5">
+      <div className=" grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 mt-2 gap-5">
         {courseList?.map((course, index) => (
           <CourseCardItem course={course} key={index} />
         ))}
