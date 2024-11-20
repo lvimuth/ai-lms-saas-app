@@ -37,7 +37,7 @@ function SelectOptions() {
             className={`p-4 flex flex-col items-center justify-center border rounded-xl hover:border-primary cursor-pointer ${
               option?.name == selectedOption && "border-primary bg-blue-50"
             }`}
-            onClick={() => setSelectedOption(option.name)}
+            onClick={() => {setSelectedOption(option.name);selectedStudyType(item.name)}}
           >
             <Image src={option.icon} alt={option.name} width={50} height={50} />
             <h2 className="text-sm mt-2">{option.name}</h2>
