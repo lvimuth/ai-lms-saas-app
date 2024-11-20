@@ -12,7 +12,7 @@ export const STUDY_MATERIAL = pgTable("studyMaterial", {
   courseId: varchar().notNull(),
   courseType: varchar().notNull(),
   topic: varchar().notNull(),
-  duffecultyLevel: varchar().default("Easy"),
+  difficultyLevel: varchar().default("Easy"),
   courseLayout: json(),
   createdBy: varchar().notNull(),
   status:varchar().default('generating'),

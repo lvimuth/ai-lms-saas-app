@@ -17,7 +17,7 @@ function TopicInput({setTopic,setDifficultyLevel}) {
       </h2>
           <Textarea placeholder="Start writing here" className="mt-2" onChange={(event)=> setTopic(event.target.value)} />
       <h2 className="mt-5 mb-3">Select the Difficulty Level</h2>
-      <Select onOpenChange={(value)=>setDifficultyLevel(value)}>
+      <Select onValueChange={(value)=>setDifficultyLevel(value)}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Difficulty Level" />
         </SelectTrigger>
