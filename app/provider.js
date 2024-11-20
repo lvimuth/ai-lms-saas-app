@@ -31,7 +31,6 @@ function Provider({ children }) {
     //     .returning({ id: USER_TABLE.id });
     //   console.log("New user created with ID:", userResp);
     // }
-    console.log("New user created");
     try {
       const resp = await axios.post("/api/create-user", {
         user: user,
