@@ -33,7 +33,10 @@ function SideBar() {
         <h2 className="font-bold text-2xl">AI LMS</h2>
       </div>
       <div className="mt-10">
-        <Button className="w-full">+ Create New</Button>
+        <Link href={"/create"} className="w-full">
+          <Button className="w-full">+ Create New</Button>
+        </Link>
+
         <div className="mt-5">
           {MenuList.map((menu, index) => (
             <div

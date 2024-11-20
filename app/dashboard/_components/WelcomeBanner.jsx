@@ -9,7 +9,9 @@ function WelcomeBanner() {
     <div className="p-5 bg-blue-500 w-full text-white rounded-lg flex items-center gap-2 lg:gap-10">
       <Image src={"/laptop.png"} alt="laptop" width={100} height={100} />
       <div>
-        <h2 className="font-bold text-5xl">Hello, {user?.fullName}</h2>
+        <h2 className="font-bold text-2xl lg:text-5xl">
+          Hello, {user?.fullName}
+        </h2>
         <p className="">
           Welcome back, Its time to get back and start learning new course
         </p>
