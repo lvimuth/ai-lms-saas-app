@@ -1,6 +1,7 @@
+import { generateNotesAIModel } from "@/configs/AIModels";
 import { inngest } from "./client";
 import { db } from "@/configs/db";
-import { USER_TABLE } from "@/configs/schema";
+import { CHAPTER_NOTES, STUDY_MATERIAL, USER_TABLE } from "@/configs/schema";
 import { eq } from "drizzle-orm";
 
 export const helloWorld = inngest.createFunction(
@@ -45,4 +46,46 @@ export const CreateNewUser = inngest.createFunction(
   // Step is to send welcome email
 
   // send emai notification to user after 3 days
+);
+
+export const GenerateNotes = inngest.createFunction(
+  { id: "generate-course" },
+  { event: "notes.generate" },
+  async ({ event, step }) => {
+    const { course } = event.data;
+
+    // Generate notes for each chapter with AI
+    const notesResult = await step.run("Generate Chapter Notes", async () => {
+      const Chapters = course?.courseLayout?.chapters;
+      let index = 0;
+      Chapters.forEach(async (chapter) => {
+        const PROMPT = `Generate exam material detail content for each chapter , Make sure to includes all topic point in the content, make sure to give content in HTML format (Do not Add HTML , Head, Body, title tag), The chapters : ${JSON.stringify(
+          chapter
+        )}}`;
+        const result = await generateNotesAIModel.sendMessage(PROMPT);
+        const aiResp = result.response.text();
+
+        await db.insert(CHAPTER_NOTES).values({
+          chapterId: index,
+          courseId: course?.courseId,
+          notes: aiResp,
+        });
+        index = index + 1;
+      });
+      return "Completed";
+    });
+    //  Update the status to "Ready"
+    const updateCourseStatusResult = await step.run(
+      "Update Course Status to Ready",
+      async () => {
+        const result = await db
+          .update(STUDY_MATERIAL)
+          .set({
+            status: "Ready",
+          })
+          .where(eq(STUDY_MATERIAL.courseId, course?.courseId));
+        return "Ready";
+      }
+    );
+  }
 );
