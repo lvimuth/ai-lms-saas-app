@@ -36,24 +36,6 @@ function Provider({ children }) {
     console.log(resp.data);
   };
 
-  const GenerateNotes = async () => {
-    // const Chapters = course?.courseLayout?.chapters;
-    // let index = 0;
-    // Chapters.forEach(async (chapter) => {
-    //   const PROMPT = `Generate exam material detail content for each chapter , Make sure to includes all topic point in the content, make sure to give content in HTML format (Do not Add HTML , Head, Body, title tag), The chapters : ${JSON.stringify(
-    //     chapter
-    //   )}}`;
-    //   const result = await generateNotesAIModel.sendMessage(PROMPT);
-    //   const aiResp = result?.response.text();
-    //   await db.insert(CHAPTER_NOTES).values({
-    //     chapterId: index,
-    //     courseId: course?.courseId,
-    //     notes: aiResp,
-    //   });
-    //   index = index + 1;
-    // });
-  };
-
   return <div>{children}</div>;
 }
 

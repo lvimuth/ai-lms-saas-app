@@ -10,6 +10,6 @@ export async function POST(req) {
       user: user,
     },
   });
-  console.log("Created new user:", result);
+  // console.log("Created new user:", result);
   return NextResponse.json({ result: result });
 }
