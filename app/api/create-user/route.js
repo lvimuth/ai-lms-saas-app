@@ -11,6 +11,5 @@ export async function POST(req) {
     },
   });
   console.log("Created new user:", result);
-  console.log(NextResponse.json({ result: result }).headers);
   return NextResponse.json({ result: result });
 }

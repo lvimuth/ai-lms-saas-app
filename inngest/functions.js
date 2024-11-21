@@ -9,7 +9,7 @@ export const helloWorld = inngest.createFunction(
   { event: "test/hello.world" },
   async ({ event, step }) => {
     await step.sleep("wait-a-moment", "1s");
-    return { message: `Hello ${event.data.email}!` };
+    return { event, body: "hello-world" };
   }
 );
 
